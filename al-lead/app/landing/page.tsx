@@ -208,8 +208,8 @@ export default function LandingPage() {
 
               {/* Video container */}
               <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
+                {/* Fallback to space-themed video or local video */}
                 <video
-                  src="https://cdn.pixabay.com/video/2019/06/22/24602-346604798_large.mp4"
                   autoPlay
                   muted
                   loop
@@ -220,7 +220,14 @@ export default function LandingPage() {
                       video.playbackRate = 0.7; // Slow down the video to 70% speed
                     }
                   }}
-                />
+                >
+                  <source src="https://cdn.pixabay.com/video/2019/06/22/24602-346604798_large.mp4" type="video/mp4" />
+                  <source src="/world.mp4" type="video/mp4" />
+                  {/* Fallback for browsers that don't support video */}
+                  <div className="w-full h-64 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center rounded-xl">
+                    <p className="text-white text-lg">Video Preview</p>
+                  </div>
+                </video>
 
                 {/* Subtle overlay for depth */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent rounded-xl sm:rounded-2xl"></div>
