@@ -7,7 +7,8 @@ import { Lead, Email, PotentialLead, EmailComponent, SummaryData, LeadAnalysis }
 const getGenAI = () => {
     const apiKey = process.env.API_KEY;
     if (!apiKey) {
-        throw new Error("API_KEY environment variable not set");
+        console.warn("API_KEY environment variable not set - AI features will be disabled");
+        return null;
     }
     return new GoogleGenAI({ apiKey });
 };
@@ -15,6 +16,9 @@ const getGenAI = () => {
 export const getAIInsight = async (prompt: string): Promise<string> => {
     try {
         const ai = getGenAI();
+        if (!ai) {
+            return "AI features are currently disabled. Please configure your API key to enable AI insights.";
+        }
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
             contents: prompt,
@@ -32,6 +36,10 @@ export const getAIInsight = async (prompt: string): Promise<string> => {
 export const findPotentialLeads = async (query: string, count: number, existingCompanies?: string[]): Promise<PotentialLead[] | null> => {
     try {
         const ai = getGenAI();
+        if (!ai) {
+            console.warn("AI features disabled - cannot find potential leads");
+            return null;
+        }
         const exclusionPrompt = existingCompanies && existingCompanies.length > 0
             ? `\n\nIMPORTANT: I have already found the following companies, so please provide different ones and do not include them in the results: ${existingCompanies.join(', ')}.`
             : '';
@@ -86,6 +94,10 @@ export const summarizePotentialLeads = async (leads: PotentialLead[]): Promise<S
 
     try {
         const ai = getGenAI();
+        if (!ai) {
+            console.warn("AI features disabled - cannot summarize leads");
+            return null;
+        }
         const prompt = `
             Based on this list of potential leads:
             ${JSON.stringify(leads.map(l => ({ company: l.company, industry: l.industry, reason: l.reason, hasEmail: !!l.email, hasPhone: !!l.phone })), null, 2)}
@@ -130,6 +142,10 @@ export const summarizePotentialLeads = async (leads: PotentialLead[]): Promise<S
 export const findLeadEmail = async (leadName: string, companyName: string): Promise<string | null> => {
     try {
         const ai = getGenAI();
+        if (!ai) {
+            console.warn("AI features disabled - cannot find email");
+            return null;
+        }
         const prompt = `
             Using Google Search, find the professional email address for a person named "${leadName}" at the company "${companyName}".
             Return ONLY the email address as a string. If you cannot find a verified email, return an empty string.
@@ -159,6 +175,10 @@ export const findLeadEmail = async (leadName: string, companyName: string): Prom
 export const generateEmailSequence = async (lead: Lead): Promise<Email[] | null> => {
     try {
         const ai = getGenAI();
+        if (!ai) {
+            console.warn("AI features disabled - cannot generate email sequence");
+            return null;
+        }
         const prompt = `
             My name is Jonathan and I am a web developer. Generate a 3-email personalized outreach sequence for a potential lead.
             The goal is to advertise my web development services.
@@ -211,6 +231,10 @@ export const generateEmailSequence = async (lead: Lead): Promise<Email[] | null>
 export const generateDirectEmail = async (lead: Lead): Promise<Email | null> => {
     try {
         const ai = getGenAI();
+        if (!ai) {
+            console.warn("AI features disabled - cannot generate direct email");
+            return null;
+        }
         const prompt = `
             My name is Jonathan, and I am a web developer. Generate a personalized, concise, and compelling cold outreach email to the following lead to advertise my web development services.
             The email should be addressed to ${lead.name} from ${lead.company} in the ${lead.industry} industry. The tone should be professional yet approachable.
@@ -246,6 +270,10 @@ export const generateDirectEmail = async (lead: Lead): Promise<Email | null> => 
 export const generateEmailVariations = async (baseSubject: string, baseBody: EmailComponent[]): Promise<{subject: string, body: EmailComponent[]}[] | null> => {
     try {
         const ai = getGenAI();
+        if (!ai) {
+            console.warn("AI features disabled - cannot generate email variations");
+            return null;
+        }
         const prompt = `
             Given the following email draft:
             Subject: ${baseSubject}
@@ -285,6 +313,10 @@ export const generateEmailVariations = async (baseSubject: string, baseBody: Ema
 export const generateEmailTemplate = async (prompt: string): Promise<EmailComponent[] | null> => {
     try {
         const ai = getGenAI();
+        if (!ai) {
+            console.warn("AI features disabled - cannot generate email template");
+            return null;
+        }
         const fullPrompt = `
             Generate an email template structure based on the following request: "${prompt}".
             The template should be a JSON array of component objects.
@@ -323,6 +355,10 @@ export const generateEmailTemplate = async (prompt: string): Promise<EmailCompon
 export const generateInitialCampaignEmail = async (campaignName: string): Promise<{ subject: string; body: EmailComponent[] } | null> => {
     try {
         const ai = getGenAI();
+        if (!ai) {
+            console.warn("AI features disabled - cannot generate campaign email");
+            return null;
+        }
         const prompt = `
             Based on the campaign goal described as "${campaignName}", generate a compelling initial outreach email.
             The email should be structured as a JSON object containing a 'subject' (string) and a 'body' (an array of component objects).
@@ -378,6 +414,10 @@ export const generateInitialCampaignEmail = async (campaignName: string): Promis
 export const suggestLeadsForCampaign = async (campaignName: string, allLeads: Lead[]): Promise<string[] | null> => {
     try {
         const ai = getGenAI();
+        if (!ai) {
+            console.warn("AI features disabled - cannot suggest leads");
+            return null;
+        }
         const prompt = `
             Based on the email campaign name "${campaignName}", select the top 5 most relevant leads from the following list.
             Consider factors like industry, company, and lead status to find the best fit. For example, a campaign about "new e-commerce features" should target retail or online businesses.
@@ -413,6 +453,10 @@ export const suggestLeadsForCampaign = async (campaignName: string, allLeads: Le
 export const analyzeLead = async (lead: Lead): Promise<LeadAnalysis | null> => {
     try {
         const ai = getGenAI();
+        if (!ai) {
+            console.warn("AI features disabled - cannot analyze lead");
+            return null;
+        }
         const prompt = `
             As a senior sales analyst for a web development agency, perform a deep analysis of the following lead:
             - Name: ${lead.name}
