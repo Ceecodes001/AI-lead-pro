@@ -206,20 +206,12 @@ export default function LandingPage() {
               {/* Glow effect behind video */}
               <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-l from-white/20 via-gray-400/10 to-white/20 rounded-2xl sm:rounded-3xl blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-700"></div>
 
-              {/* Video container */}
+              {/* GIF container */}
               <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
-                <video
-                  src="/world.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-auto object-cover filter brightness-110 contrast-105 rounded-xl sm:rounded-2xl"
-                  ref={(video) => {
-                    if (video) {
-                      video.playbackRate = 0.7; // Slow down the video to 70% speed
-                    }
-                  }}
+                <img
+                  src="/world.gif"
+                  alt="World Animation"
+                  className="w-full h-auto object-cover filter "
                 />
 
                 {/* Subtle overlay for depth */}
