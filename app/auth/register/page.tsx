@@ -59,14 +59,14 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen bg-black flex items-center justify-center p-4">
+      <div className="w-full bg-white/20 max-w-md">
         <div className="bg-card-bg border border-white/10 rounded-lg p-8 shadow-lg">
           {/* Logo */}
           <div className="flex justify-center mb-8">
             <div className="w-20 h-20 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20 shadow-lg flex items-center justify-center">
               <img
-                src="/logo2.png"
+                src="/logo.png"
                 alt="AI Lead Manager Pro"
                 className="w-16 h-16 object-contain brightness-110 contrast-110"
               />

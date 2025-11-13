@@ -52,7 +52,7 @@ export default function LandingPage() {
             <div className="absolute -inset-1 bg-gradient-to-r from-white/20 to-gray-400/10 rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-700"></div>
             <div className="relative w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-white/10 to-white/5 rounded-xl backdrop-blur-sm border border-white/20 shadow-2xl flex items-center justify-center">
               <img
-                src="/logo2.png"
+                src="/logo.png"
                 alt="Nova Leads"
                 className="w-6 h-6 sm:w-8 sm:h-8 object-contain brightness-110 contrast-110"
               />
@@ -221,7 +221,10 @@ export default function LandingPage() {
                     }
                   }}
                 >
-                  <source src="https://cdn.pixabay.com/video/2019/06/22/24602-346604798_large.mp4" type="video/mp4" />
+                  <source
+                    src="https://cdn.pixabay.com/video/2019/06/22/24602-346604798_large.mp4"
+                    type="video/mp4"
+                  />
                   <source src="/world.mp4" type="video/mp4" />
                   {/* Fallback for browsers that don't support video */}
                   <div className="w-full h-64 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center rounded-xl">

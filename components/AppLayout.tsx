@@ -59,11 +59,7 @@ function AppLayoutContent({ children }: { children: React.ReactNode }) {
 
   // If it's an auth page, render without sidebar/header
   if (isAuthPage) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-        {children}
-      </div>
-    );
+    return <div className="min-h-screen bg-black ">{children}</div>;
   }
 
   // If it's the landing page, render without sidebar/header
@@ -72,7 +68,7 @@ function AppLayoutContent({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+    <div className="flex h-screen bg-gray-900 overflow-hidden">
       {/* Mobile Overlay */}
       {isMobileNavOpen && (
         <div

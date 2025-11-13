@@ -43,7 +43,7 @@ const Header: React.FC<{
           {/* Logo - Mobile only */}
           <div className="w-8 h-8 flex items-center justify-center bg-white/10 rounded-lg backdrop-blur-sm border border-white/20 lg:hidden">
             <img
-              src="/logo2.png"
+              src="/logo.png"
               alt="AI Lead Manager Pro"
               className="w-6 h-6 object-contain brightness-110 contrast-110"
             />
@@ -58,7 +58,7 @@ const Header: React.FC<{
           <input
             type="search"
             placeholder="Search..."
-            className="bg-card-bg border border-white/10 rounded-lg py-2 pl-10 pr-4 w-40 lg:w-64 focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm"
+            className="bg-gray-700 border border-white/10 rounded-lg py-2 pl-10 pr-4 w-40 lg:w-64 focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm"
           />
           <svg
             className="w-5 h-5 text-text-muted absolute left-3 top-1/2 -translate-y-1/2"

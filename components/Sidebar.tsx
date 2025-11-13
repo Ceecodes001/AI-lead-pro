@@ -109,7 +109,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         <Link href="/dashboard">
           <div className="w-[75px] h-[75px] mb-8 lg:mb-12 flex items-center justify-center mx-auto mt-[-10px] ">
             <img
-              src="/logo2.png"
+              src="/logo.png"
               alt="AI Lead Manager Pro"
               className="w-20 h-20 object-contain brightness-110 contrast-110"
             />
